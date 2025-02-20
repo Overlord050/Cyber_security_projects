@@ -1,0 +1,2 @@
+i'm making a small toolbox that i can use on my hostmachine, instead of a vm like kali.
+Sometimes you just want to hop in and do something quickly.
