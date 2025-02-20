@@ -1,0 +1,3 @@
+python reconnaissance.py --domain example.com
+python reconnaissance.py --ip 8.8.8.8
+python reconnaissance.py --image photo.jpg

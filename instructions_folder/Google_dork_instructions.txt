@@ -1,0 +1,2 @@
+Je kan gewoon de file runnen, normaal.
+Als het nodig is, moet je via de terminal moet runnen " python .\google_dork.py"
