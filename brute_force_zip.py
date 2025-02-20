@@ -1,5 +1,7 @@
 import zipfile
 
+#you need to download the rockyou_link.txt file first!
+
 zip_file = "protected.zip" # this is the zip file that you want to crack.
 wordlist = "rockyou.txt"
 
