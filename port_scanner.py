@@ -7,7 +7,7 @@ def scan_port(target, port):
         if s.connect_ex((target, port)) == 0:
             print(f"[+] Port {port} is OPEN")
 
-target = "politieenwetenschap.nl"
+target = "google.com"
 ports = range(1, 10000)  ## Scan10000 ports
 
 ## threading because otherwise it's slow as heck

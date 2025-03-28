@@ -19,5 +19,5 @@ def print_phone_details(phone_number, label):
     print("International Format:", phonenumbers.format_number(phone_number, phonenumbers.PhoneNumberFormat.INTERNATIONAL))
     print("National Format:", phonenumbers.format_number(phone_number, phonenumbers.PhoneNumberFormat.NATIONAL))
 
-# Print details for each phone number that you have added to it!
+# Print details for each phone number that you have added to it! only basic information.
 print_phone_details(phone_number1, "Phone Number 1")

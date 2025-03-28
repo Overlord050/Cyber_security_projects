@@ -6,7 +6,10 @@ from PIL import Image
 from PIL.ExifTags import TAGS
 import argparse
 
-SHODAN_API_KEY="AObjXVXeLRdBKlIQAO1neQvtntphWXJ9"
+
+
+# put your own api-key here of Shodan!
+SHODAN_API_KEY=""
 
  
 # Make sure to set the SHODAN_API_KEY in your visual code studio

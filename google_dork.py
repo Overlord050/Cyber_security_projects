@@ -1,8 +1,13 @@
 import requests
 import csv
 import time
+import os
 
-API_KEY = "724c6d47814741b1e62730e7bdb9e386637c0aba6eca93a29e93ef98ae9d1de7"  
+API_KEY = os.getenv("SERPAPI_KEY")
+
+if not API_KEY:
+    print("API key not found. Please set the SERPAPI_KEY environment variable.")
+    exit()
 
 # User input
 first_name = input("Enter First Name (or press Enter to skip): ").strip()
@@ -42,15 +47,13 @@ params = {
     "api_key": API_KEY
 }
 
-
-#this part i had my bff chatpt make for me
 # API Request with error handling
 try:
     response = requests.get("https://serpapi.com/search", params=params)
     response.raise_for_status()
     data = response.json()
 except requests.exceptions.RequestException as e:
-    print(f"❌ API Request Failed: {e}")
+    print(f"API Request Failed: {e}")
     exit()
 
 results = []
@@ -58,24 +61,22 @@ for result in data.get("organic_results", []):
     title = result.get("title", "No Title")
     link = result.get("link", "No Link")
     snippet = result.get("snippet", "No Description")
-    results.append([title, link, snippet])
+    results.append([title, snippet, link])  # Reordered to put the link last
 
 csv_filename = "search_results.csv"
 
-# Append to CSV instead of overwriting
-with open(csv_filename, "a", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f)
-    if f.tell() == 0:
-        writer.writerow(["Title", "Link", "Description"])
-    writer.writerows(results)
-
-# Output results
+# Refresh the CSV (overwrite it) with new results
 if results:
-    print(f"\n {len(results)} Results Found! Saved to {csv_filename}")
+    with open(csv_filename, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Title", "Description", "Link"])  # Header with separate columns
+        writer.writerows(results)  # Write the search results
+
+    print(f"\n{len(results)} Results Found! Saved to {csv_filename}")
     for res in results:
-        print(f"\n🔹 {res[0]}\n🔗 {res[1]}\n📄 {res[2]}")
+        print(f"\n🔹 {res[0]}\n📄 {res[1]}\n🔗 {res[2]}")  # Output results with new order
 else:
-    print("\n No documents found. Try different search filters.")
+    print("\nNo documents found. Try different search filters.")
 
 # Rate limit management to avoid excessive API usage
 time.sleep(2)  # Adding a delay before any potential next request
